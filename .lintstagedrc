@@ -1,0 +1,5 @@
+{
+  "src/**/*.{js,ts,jsx,tsx,vue}": "pnpm eslint:fix",
+  "src/**/*.{vue,css,scss,html}": "pnpm stylelint:fix",
+  "src/**/*.{js,ts,jsx,tsx,vue,css,scss,less,html,md}": "pnpm format"
+}
