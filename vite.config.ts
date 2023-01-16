@@ -6,6 +6,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import eslintPlugin from 'vite-plugin-eslint'
 import stylelintPlugin from 'vite-plugin-stylelint'
 import { ViteEjsPlugin } from 'vite-plugin-ejs'
+import svgLoader from 'vite-svg-loader'
 
 export default defineConfig({
   plugins: [
@@ -25,6 +26,11 @@ export default defineConfig({
     ViteEjsPlugin(config => ({
       CONFIG: config,
     })),
+    svgLoader({
+      svgoConfig: {
+        multipass: true,
+      },
+    }),
   ],
   resolve: {
     alias: {
