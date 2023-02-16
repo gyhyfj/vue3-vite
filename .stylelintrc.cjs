@@ -27,7 +27,7 @@ module.exports = {
   ],
   rules: {
     'import-notation': 'string',
-    'function-no-unknown': [true, { ignoreFunctions: ['constant', 'v-bind'] }],
+    'function-no-unknown': [true, { ignoreFunctions: ['constant', 'v-bind','theme'] }],
     'string-quotes': 'single',
     'selector-class-pattern': null,
     // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
@@ -50,10 +50,36 @@ module.exports = {
     // 禁止小于 1 的小数有一个前导零
     // 'number-leading-zero': 'never',
     // 一些特殊的scss指令
+    'scss/at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: [
+          'tailwind',
+          'layer',
+          'apply',
+          'variants',
+          'responsive',
+          'screen',
+          'function',
+          'if',
+          'else',
+          'else-if',
+          'each',
+          'include',
+          'mixin',
+        ],
+      },
+    ],
     'at-rule-no-unknown': [
       true,
       {
         ignoreAtRules: [
+          'tailwind',
+          'layer',
+          'apply',
+          'variants',
+          'responsive',
+          'screen',
           'function',
           'if',
           'else',

@@ -1,6 +1,9 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
 import path from 'path'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
+import cssNesting from 'tailwindcss/nesting'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import eslintPlugin from 'vite-plugin-eslint'
@@ -40,14 +43,15 @@ export default defineConfig({
   envDir: path.resolve(__dirname, './env'),
   envPrefix: ['VITE_'],
   css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: '@import "./src/styles/index.scss";',
-      },
+    postcss: {
+      plugins: [tailwindcss, autoprefixer, cssNesting as any],
     },
   },
   esbuild: {
     drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+  },
+  server:{
+    host: true,
   },
   define: {
     'import.meta.vitest': 'undefined',
