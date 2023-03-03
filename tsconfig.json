@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES6",
     "useDefineForClassFields": true,
+    "suppressImplicitAnyIndexErrors": true,
     "module": "ESNext",
     "moduleResolution": "Node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strict": true,
     "jsx": "preserve",
     "resolveJsonModule": true,

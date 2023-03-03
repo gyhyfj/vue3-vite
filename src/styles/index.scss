@@ -6,4 +6,10 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
+
+  .scrollbar-none {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

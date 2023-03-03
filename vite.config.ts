@@ -50,11 +50,14 @@ export default defineConfig({
   esbuild: {
     drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
   },
-  server:{
+  server: {
     host: true,
   },
   define: {
     'import.meta.vitest': 'undefined',
+    __VUE_I18N_FULL_INSTALL__: true,
+    __VUE_I18N_LEGACY_API__: false,
+    __INTLIFY_PROD_DEVTOOLS__: false,
   },
   test: { includeSource: ['src/**/*.{js,ts}'] },
 })

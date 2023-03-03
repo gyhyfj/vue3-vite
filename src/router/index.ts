@@ -7,6 +7,13 @@ const routes: RouteRecordRaw[] = [
   },
 ]
 
+if (process.env.NODE_ENV === 'development') {
+  routes.push({
+    path: '/svg',
+    component: () => import('@/assets/svg/svg-preview.vue'),
+  })
+}
+
 export const router = createRouter({
   history: createWebHistory(),
   routes,

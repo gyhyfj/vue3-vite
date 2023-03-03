@@ -27,9 +27,13 @@ module.exports = {
   ],
   rules: {
     'import-notation': 'string',
-    'function-no-unknown': [true, { ignoreFunctions: ['constant', 'v-bind','theme'] }],
+    'function-no-unknown': [
+      true,
+      { ignoreFunctions: ['constant', 'v-bind', 'theme'] },
+    ],
     'string-quotes': 'single',
     'selector-class-pattern': null,
+    'no-empty-source': null,
     // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
     'no-descending-specificity': null,
     'property-no-vendor-prefix': null,
@@ -70,26 +74,7 @@ module.exports = {
         ],
       },
     ],
-    'at-rule-no-unknown': [
-      true,
-      {
-        ignoreAtRules: [
-          'tailwind',
-          'layer',
-          'apply',
-          'variants',
-          'responsive',
-          'screen',
-          'function',
-          'if',
-          'else',
-          'else-if',
-          'each',
-          'include',
-          'mixin',
-        ],
-      },
-    ],
+    'at-rule-no-unknown': null,
     'at-rule-empty-line-before': [
       'always',
       {
