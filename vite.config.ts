@@ -1,63 +1,44 @@
-/// <reference types="vitest" />
+import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
-import path from 'path'
-import tailwindcss from 'tailwindcss'
-import autoprefixer from 'autoprefixer'
-import cssNesting from 'tailwindcss/nesting'
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+import VueDevTools from 'vite-plugin-vue-devtools'
 import AutoImport from 'unplugin-auto-import/vite'
-import eslintPlugin from 'vite-plugin-eslint'
-import stylelintPlugin from 'vite-plugin-stylelint'
-import { ViteEjsPlugin } from 'vite-plugin-ejs'
-import svgLoader from 'vite-svg-loader'
+import Icons from 'unplugin-icons/vite'
+import Components from 'unplugin-vue-components/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 export default defineConfig({
   plugins: [
     vue(),
-    AutoImport({
-      imports: ['vue', 'vitest'],
-      dts: false,
-    }),
-    eslintPlugin({
-      exclude: ['./node_modules/**'],
-      cache: false,
-    }),
-    stylelintPlugin({
-      fix: true,
-      quiet: true,
-    }),
-    ViteEjsPlugin(config => ({
-      CONFIG: config,
-    })),
-    svgLoader({
-      svgoConfig: {
-        multipass: true,
+    vueJsx(),
+    VueDevTools(),
+    // https://icones.js.org/
+    Icons({
+      compiler: 'vue3',
+      autoInstall: true,
+      customCollections: {
+        custom: FileSystemIconLoader('src/assets/svg'),
       },
+    }),
+    AutoImport({
+      dts: './src/types/auto-imports.d.ts',
+      imports: ['vue', 'vue-router', 'pinia'],
+    }),
+    Components({
+      dts: './src/types/auto-components.d.ts',
+      resolvers: [
+        IconsResolver({
+          prefix: 'icon',
+          customCollections: ['custom'],
+        }),
+      ],
     }),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  envDir: path.resolve(__dirname, './env'),
-  envPrefix: ['VITE_'],
-  css: {
-    postcss: {
-      plugins: [tailwindcss, autoprefixer, cssNesting as any],
-    },
-  },
-  esbuild: {
-    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
-  },
-  server: {
-    host: true,
-  },
-  define: {
-    'import.meta.vitest': 'undefined',
-    __VUE_I18N_FULL_INSTALL__: true,
-    __VUE_I18N_LEGACY_API__: false,
-    __INTLIFY_PROD_DEVTOOLS__: false,
-  },
-  test: { includeSource: ['src/**/*.{js,ts}'] },
 })

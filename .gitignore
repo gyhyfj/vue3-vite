@@ -8,21 +8,27 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.DS_Store
 dist
 dist-ssr
+coverage
 *.local
+
+/cypress/videos/
+/cypress/screenshots/
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-!.vscode/launch.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-.stylelintcache
-/components.d.ts
+*.tsbuildinfo
+
+# auto d.ts
+src/types/auto-imports.d.ts
+src/types/auto-components.d.ts

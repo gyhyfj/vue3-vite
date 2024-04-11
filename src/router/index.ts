@@ -1,20 +1,18 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-
-const routes: RouteRecordRaw[] = [
-  {
-    path: '/',
-    component: () => import('@/pages/home/home.vue'),
-  },
-]
-
-if (process.env.NODE_ENV === 'development') {
-  routes.push({
-    path: '/svg',
-    component: () => import('@/assets/svg/svg-preview.vue'),
-  })
-}
+import { createRouter, createWebHistory } from 'vue-router'
+import IndexPage from '@/pages/index.vue'
 
 export const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'home',
+      component: IndexPage,
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('@/pages/about.vue'),
+    },
+  ],
 })

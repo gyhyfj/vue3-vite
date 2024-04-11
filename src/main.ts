@@ -1,14 +1,12 @@
-import { createApp } from 'vue'
-import { pinia } from '@/stores'
+import './assets/styles/index.css'
 import { router } from '@/router'
-import App from '@/App.vue'
-import SvgRaw from './components/SvgRaw/index.vue'
-import { i18n } from '@/i18n'
-import './styles'
+import { pinia } from '@/stores'
+
+import App from './App.vue'
 
 const app = createApp(App)
+
 app.use(pinia)
 app.use(router)
-app.use(i18n)
-app.component('SvgRaw', SvgRaw)
+
 app.mount('#app')
