@@ -11,7 +11,13 @@ import { FileSystemIconLoader } from 'unplugin-icons/loaders'
 
 export default defineConfig({
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('ce-'),
+        },
+      },
+    }),
     vueJsx(),
     VueDevTools(),
     // https://icones.js.org/
